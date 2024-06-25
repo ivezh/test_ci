@@ -3,8 +3,11 @@ package simple;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -16,6 +19,7 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 
 
 @Tag("remote_test")
@@ -43,6 +47,11 @@ public class UiTests {
         Configuration.browserCapabilities = capabilities;
     }
 
+    @BeforeEach
+    void addListener(){
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
+
     @Attachment(value = "Screenshot", type = "image/png", fileExtension = "png")
     public byte[] takeScreenshot(){
         return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
@@ -50,13 +59,21 @@ public class UiTests {
 
     @Test
     void loginTest(){
-        open("/signin");
-        $(By.cssSelector("[name=\"usernameOrEmail\"]")).setValue("admin@gmail.com");
-        $(By.cssSelector("[name=\"password\"]")).setValue("test");
-        takeScreenshot();
-        $(By.cssSelector("[type=\"submit\"]")).click();
-        $(By.cssSelector("[href=\"./navigation\"]")).shouldBe(Condition.visible);
-        takeScreenshot();
-        System.out.println("NNNNNNNNAAAAAME " + WebDriverRunner.driver().browser().isSafari());
+
+        step("Open website", () -> {
+            open("/signin");
+        });
+
+        step("Fill in the input fields", () -> {
+            $(By.cssSelector("[name=\"usernameOrEmail\"]")).setValue("admin@gmail.com");
+            $(By.cssSelector("[name=\"password\"]")).setValue("test");
+            takeScreenshot();
+        });
+
+        step("Submit creds and check login is successfull", () -> {
+            $(By.cssSelector("[type=\"submit\"]")).click();
+            $(By.cssSelector("[href=\"./navigation\"]")).shouldBe(Condition.visible);
+            takeScreenshot();
+        });
     }
 }
