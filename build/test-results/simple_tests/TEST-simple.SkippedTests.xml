@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="simple.SkippedTests" tests="4" skipped="4" failures="0" errors="0" timestamp="2024-06-18T00:47:47" hostname="WIN-0DVQF3TNI5I" time="0.003">
+<testsuite name="simple.SkippedTests" tests="4" skipped="4" failures="0" errors="0" timestamp="2024-06-19T00:50:29" hostname="WIN-0DVQF3TNI5I" time="0.025">
   <properties/>
-  <testcase name="test1()" classname="simple.SkippedTests" time="0.001">
+  <testcase name="test1()" classname="simple.SkippedTests" time="0.002">
     <skipped/>
   </testcase>
   <testcase name="test2()" classname="simple.SkippedTests" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="test3()" classname="simple.SkippedTests" time="0.0">
+  <testcase name="test3()" classname="simple.SkippedTests" time="0.001">
     <skipped/>
   </testcase>
   <testcase name="test4()" classname="simple.SkippedTests" time="0.0">
