@@ -7,8 +7,8 @@ allure {
     report{
         version.set("2.19.0")
     }
-    adapter{
-        aspectjWeaver.set(true)
+    adapter{ //отвечает за появление папки build/allure-results
+        aspectjWeaver.set(true) // обработка аннотации @Step
         frameworks{
             junit5{}
         }
@@ -37,6 +37,17 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+compileTestJava {
+    options.encoding = 'UTF-8'
 }
 
 
