@@ -23,6 +23,6 @@ public class SystemPropertiesTests {
     @Tags({@Tag("property_test"), @Tag("prod")})
     void simplePropertyTest1() {
 //        String browserName = System.getProperty("browser", "chrome");
-        System.out.println(System.getProperty("browser"));
+        System.out.println("HELOOOOOOOOOOOO  " + System.getProperty("browser", "chrome"));
     }
 }
