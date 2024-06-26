@@ -20,7 +20,7 @@ public class SystemPropertiesTests {
         System.out.println(browserName);
     }
     @Test
-    @Tags({@Tag("property_test"), @Tag("prod")})
+    @Tag("property_test")
     void simplePropertyTest1() {
 //        String browserName = System.getProperty("browser", "chrome");
         System.out.println("HELOOOOOOOOOOOO  " + System.getProperty("browser", "chrome"));
