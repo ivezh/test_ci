@@ -22,11 +22,11 @@ public class UiTests {
 
     @BeforeAll
     static void beforeAll(){
-        Configuration.baseUrl = "https://allpeople-aws.noveogroup.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.browser = "chrome";
-        Configuration.browserVersion = "124.0";
-        Configuration.remote = "http://172.30.31.22:8080/wd/hub";
+        Configuration.baseUrl = System.getProperty("base_url", "https://allpeople-aws.noveogroup.com");
+        Configuration.browserSize = System.getProperty("browser_size","1920x1080");
+        Configuration.browser = System.getProperty("browser","chrome");
+//        Configuration.browserVersion = "124.0";
+        Configuration.remote = System.getProperty("remote", "http://172.30.31.22:8080/wd/hub");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
@@ -49,6 +49,7 @@ public class UiTests {
     }
 
     @Test
+    @Tag("ui")
     void loginTest(){
 
         step("Open website", () -> {
@@ -65,7 +66,6 @@ public class UiTests {
         step("Submit creds and check login is successfull", () -> {
             $(By.cssSelector("[type=\"submit\"]")).click();
             $(By.cssSelector("[href=\"./navigation\"]")).shouldBe(Condition.visible);
-            Attach.addScreenshot();
         });
     }
 }
