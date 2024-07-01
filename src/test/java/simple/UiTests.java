@@ -19,7 +19,6 @@ import static io.qameta.allure.Allure.step;
 @Tag("remote_test")
 public class UiTests {
 
-
     @BeforeAll
     static void beforeAll(){
         Configuration.baseUrl = System.getProperty("base_url", "https://allpeople-aws.noveogroup.com");
